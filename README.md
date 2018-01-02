@@ -8,7 +8,12 @@ consumers to search and utilize services.
 * [ACES Marketplace API Specification](aces-marketplace-api-swagger.yaml)
 
 
+## Swagger Editor
+
 This specification can be viewed using [Swagger Editor](https://editor.swagger.io/) by
 importing the following URL: 
 
 `https://raw.githubusercontent.com/ark-aces/aces-marketplace-api/master/aces-marketplace-api-swagger.yaml`
+
+
+![](assets/screenshot.png)
