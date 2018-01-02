@@ -1,0 +1,8 @@
+{
+  "apiPackage": "ArkAces\\AcesMarketplace",
+  "artifactVersion": "1.0.0",
+  "composerVendorName": "ark-aces",
+  "composerProjectName": "aces-marketplace-api",
+  "variableNamingConvention": "camelCase",
+  "invokerPackage": "ArkAces\\AcesMarketplaceApi"
+}

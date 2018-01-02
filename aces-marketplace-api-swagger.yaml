@@ -1,0 +1,111 @@
+swagger: '2.0'
+info:
+  title: ACES Marketplace API
+  description: |
+    API Specification for interacting with ACES Marketplace instances.
+    ACES Marketplace instances allow service providers to register and track ACES Listener 
+    and ACES Service nodes into a Service Marketplace, and allows consumers to search 
+    and utilize services. 
+  version: "1.0.0-beta"
+schemes:
+  - https
+produces:
+  - application/json
+tags:
+  - name: AcesMarketplace
+    description: ACES Marketplace API
+    externalDocs:
+      url: https://ark-aces.github.io/aces-marketplace-api/
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+paths:
+  /:
+    get:
+      tags:
+        - AcesMarketplaceApi
+      summary: Get instance information.
+      description: Get ACES Marketplace instance information.
+      responses:
+        200:
+          description: Marketplace instance information.
+          schema:
+            $ref: "#/definitions/ServerInfo"
+  /health:
+    get:
+      tags:
+        - AcesMarketplaceApi
+      summary: Get Health of node.
+      description: Get application health information.
+      responses:
+        200:
+          description: Health information.
+          schema:
+            $ref: "#/definitions/Health"
+
+
+responses:
+  BadRequest:
+    description: The request was invalid.
+    schema:
+      $ref: "#/definitions/ValidationError"
+  Unauthorized:
+    description: Authentication information is missing or invalid
+    headers:
+      WWW_Authenticate:
+        type: string
+  NotFound:
+    description: The specified resource was not found.
+    schema:
+      $ref: "#/definitions/NotFoundError"
+
+definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+  Health:
+    type: object
+    properties:
+      status:
+        type: string
+        enum: [up, down]
+  ValidationError:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      fieldErrors:
+        type: array
+        items:
+          $ref: "#/definitions/FieldError"
+  FieldError:
+    type: object
+    properties:
+      field:
+        type: string
+      code:
+        type: string
+      message:
+        type: string
+  NotFoundError:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+  ServerInfo:
+    type: object
+    properties:
+      name:
+        type: string
+      version:
+        type: string
