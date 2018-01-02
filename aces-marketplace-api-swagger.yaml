@@ -6,7 +6,7 @@ info:
     ACES Marketplace instances allow service providers to register and track ACES Listener
     and ACES Service nodes into a Service Marketplace, and allows consumers to search
     and utilize services.
-  version: "1.0.0-beta"
+  version: "1.0.0"
 schemes:
   - https
 produces:
@@ -17,10 +17,14 @@ tags:
     externalDocs:
       url: https://ark-aces.github.io/aces-marketplace-api/
 securityDefinitions:
-  basicAuth:
-    type: basic
+  oauth:
+    type: oauth2
+    authorizationUrl: "https://marketplace.arkaces.com/api/auth/"
+    flow: implicit
+    scopes:
+      "account": "Access account data"
 security:
-  - basicAuth: []
+  - oauth: []
 paths:
   /:
     get:
