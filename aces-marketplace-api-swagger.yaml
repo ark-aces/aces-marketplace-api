@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
   title: ACES Marketplace API
-  description: |
-    API Specification for interacting with ACES Marketplace instances.
-    ACES Marketplace instances allow service providers to register and track ACES Listener 
+  description: >
+    API Specification for interacting with ACES Marketplace instances. ACES Marketplace 
+    instances allow service providers to register and track ACES Listener 
     and ACES Service nodes into a Service Marketplace, and allows consumers to search 
     and utilize services. 
   version: "1.0.0-beta"
@@ -12,15 +12,22 @@ schemes:
 produces:
   - application/json
 tags:
-  - name: AcesMarketplace
+  - name: AcesMarketplaceApi
     description: ACES Marketplace API
     externalDocs:
       url: https://ark-aces.github.io/aces-marketplace-api/
 securityDefinitions:
   basicAuth:
     type: basic
+  oauth:
+    type: oauth2
+    authorizationUrl: "https://marketplace.arkaces.com/api/auth/"
+    flow: implicit
+    scopes:
+      "account": "Access account data"
 security:
   - basicAuth: []
+  - oauth: []
 paths:
   /:
     get:
@@ -37,8 +44,8 @@ paths:
     get:
       tags:
         - AcesMarketplaceApi
-      summary: Get Health of node.
-      description: Get application health information.
+      summary: Get Health of marketplace server.
+      description: Get Marketplace API health status information.
       responses:
         200:
           description: Health information.
